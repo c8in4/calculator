@@ -1,12 +1,11 @@
 let num1 = null;
 let num2 = null;
 let operatorSign = null;
-let numbersToDisplay = "";
+let result = null;
 
 const display = document.querySelector("#display");
-
 const clearButton = document.querySelector("#clear");
-
+const equalsButton = document.querySelector("#equals");
 const numButtons = [
     zeroButton = document.querySelector("#zero"),
     oneButton = document.querySelector("#one"),
@@ -20,16 +19,22 @@ const numButtons = [
     nineButton = document.querySelector("#nine")
 ];
 
-numButtons.forEach(button => {
-    button.addEventListener("click", (e) => concatChar(e.target.textContent));
-});
-
 const operatorButtons = [
     plusButton = document.querySelector("#plus"),
     minusButton = document.querySelector("#minus"),
     multiplyButton = document.querySelector("#multiply"),
     divideButton = document.querySelector("#divide")
 ];
+
+equalsButton.addEventListener("click", () => {
+    num2 = +display.textContent.slice(1);
+    operate(operatorSign, num1, num2);
+    console.log("first number: " + num1 + "\noperator: " + operatorSign +  "\nsecond number: " + num2)
+})
+
+numButtons.forEach(button => {
+    button.addEventListener("click", (e) => concatChar(e.target.textContent));
+});
 
 operatorButtons.forEach(button => {
     button.addEventListener("click", (e) => {
@@ -48,29 +53,32 @@ function concatChar(char) {
     display.textContent += char;
 }
 
-
 function clearDisplay() {
     display.textContent = "";
     operatorSign = null;
+    num1 = null;
+    num2 = null;
+    result = null;
 }
 
 function operate(operator, a, b) {
     switch (operator) {
         case "+":
-            add(a, b);
+            result = add(a, b);
             break;
         case "-":
-            subtract(a, b);
+            result = subtract(a, b);
             break;
         case "*":
-            multiply(a, b);
+            result = multiply(a, b);
             break;
         case "/":
-            divide(a, b);
+            result = divide(a, b);
             break;
     }
-}
 
+    display.textContent = Math.floor(result * 1000) / 1000;
+}
 
 function add(a, b) {
     return a + b;
