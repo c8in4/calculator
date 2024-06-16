@@ -39,3 +39,12 @@ main {
     padding: 0.6rem;
     outline: 0.1rem solid var(--color-primary);
 }
+
+#calculator button {
+    width: 5rem;
+    aspect-ratio: 1;
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin: 0.2rem;
+    border-radius: 1rem;
+}

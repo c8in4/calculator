@@ -27,27 +27,27 @@ const operatorButtons = [
 ];
 
 equalsButton.addEventListener("click", () => {
-    num2 = +display.textContent.slice(1);
-    operate(operatorSign, num1, num2);
-    console.log("first number: " + num1 + "\noperator: " + operatorSign +  "\nsecond number: " + num2)
+
 })
 
 numButtons.forEach(button => {
-    button.addEventListener("click", (e) => concatChar(e.target.textContent));
-});
-
-operatorButtons.forEach(button => {
     button.addEventListener("click", (e) => {
-        if (+display.textContent) {
-            num1 = +display.textContent;
-        }
-        operatorSign = e.target.textContent;
-        display.textContent = "";
         concatChar(e.target.textContent);
     });
 });
 
-clearButton.addEventListener("click", clearDisplay)
+operatorButtons.forEach(button => {
+    button.addEventListener("click", (e) => {
+       if (!num1) num1 = +display.textContent;
+       operatorSign = e.target.textContent;
+    });
+});
+
+clearButton.addEventListener("click",() => {
+    clearDisplay();
+    resetValues();
+});
+
 
 function concatChar(char) {
     display.textContent += char;
@@ -55,6 +55,9 @@ function concatChar(char) {
 
 function clearDisplay() {
     display.textContent = "";
+}
+
+function resetValues() {
     operatorSign = null;
     num1 = null;
     num2 = null;
@@ -64,38 +67,22 @@ function clearDisplay() {
 function operate(operator, a, b) {
     switch (operator) {
         case "+":
-            result = add(a, b);
+            result = a + b;
             break;
         case "-":
-            result = subtract(a, b);
+            result = a - b;
             break;
         case "*":
-            result = multiply(a, b);
+            result = a * b;
             break;
         case "/":
-            result = divide(a, b);
+            if (b === 0) {
+                alert("You can not divide by 0!");
+                return;
+            };
+            result = a / b;
             break;
     }
 
     display.textContent = Math.floor(result * 1000) / 1000;
-}
-
-function add(a, b) {
-    return a + b;
-}
-
-function subtract(a, b) {
-    return a - b;
-}
-
-function multiply(a, b) {
-    return a * b;
-}
-
-function divide(a, b) {
-    if (b === 0) {
-        alert("You can not divide by 0!");
-        return;
-    }
-    return a / b;
 }
