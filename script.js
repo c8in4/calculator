@@ -4,7 +4,6 @@ let operatorSign = null;
 let result = null;
 
 const display = document.querySelector("#display");
-const displayContent = display.textContent;
 const clearButton = document.querySelector("#clear");
 const equalsButton = document.querySelector("#equals");
 const numButtons = [
@@ -28,36 +27,56 @@ const operatorButtons = [
 ];
 
 equalsButton.addEventListener("click", () => {
-
+    if (num1 && !num2) num2 = getNum();
+    calculate();
+    displayResult();
+    resetValues();
 })
 
 numButtons.forEach(button => {
     button.addEventListener("click", (e) => {
-
+        if (display.textContent == operatorSign
+            || display.textContent == "0")
+            clearDisplay();
+        concatChar(e.target.textContent);
     });
 });
 
 operatorButtons.forEach(button => {
     button.addEventListener("click", (e) => {
-
+        if (num1 && !num2) {
+            num2 = getNum();
+            calculate();
+            num1 = result;
+            num2 = null;
+        };
+        if (!num1) num1 = getNum();
+        getOperator(e);
+        clearDisplay();
+        display.textContent = operatorSign;
     });
 });
 
 clearButton.addEventListener("click", () => {
-
+    clearDisplay();
+    resetValues();
 });
 
 
 function getNum() {
+    return +display.textContent;
+}
 
+function getOperator(operator) {
+    operatorSign = operator.target.textContent;
 }
 
 function concatChar(char) {
-    displayContent += char;
+    display.textContent += char;
 }
 
 function clearDisplay() {
-    displayContent = "";
+    display.textContent = "";
 }
 
 function resetValues() {
@@ -86,6 +105,8 @@ function calculate() {
             result = num1 / num2;
             break;
     }
+}
 
-    displayContent = Math.floor(result * 1000) / 1000;
+function displayResult() {
+    display.textContent = Math.floor(result * 1000) / 1000;
 }
