@@ -4,6 +4,7 @@ let operatorSign = null;
 let result = null;
 
 const display = document.querySelector("#display");
+const displayContent = display.textContent;
 const clearButton = document.querySelector("#clear");
 const equalsButton = document.querySelector("#equals");
 const numButtons = [
@@ -32,29 +33,31 @@ equalsButton.addEventListener("click", () => {
 
 numButtons.forEach(button => {
     button.addEventListener("click", (e) => {
-        concatChar(e.target.textContent);
+
     });
 });
 
 operatorButtons.forEach(button => {
     button.addEventListener("click", (e) => {
-       if (!num1) num1 = +display.textContent;
-       operatorSign = e.target.textContent;
+
     });
 });
 
-clearButton.addEventListener("click",() => {
-    clearDisplay();
-    resetValues();
+clearButton.addEventListener("click", () => {
+
 });
 
 
+function getNum() {
+
+}
+
 function concatChar(char) {
-    display.textContent += char;
+    displayContent += char;
 }
 
 function clearDisplay() {
-    display.textContent = "";
+    displayContent = "";
 }
 
 function resetValues() {
@@ -64,25 +67,25 @@ function resetValues() {
     result = null;
 }
 
-function operate(operator, a, b) {
-    switch (operator) {
+function calculate() {
+    switch (operatorSign) {
         case "+":
-            result = a + b;
+            result = num1 + num2;
             break;
         case "-":
-            result = a - b;
+            result = num1 - num2;
             break;
         case "*":
-            result = a * b;
+            result = num1 * num2;
             break;
         case "/":
-            if (b === 0) {
+            if (num2 === 0) {
                 alert("You can not divide by 0!");
                 return;
             };
-            result = a / b;
+            result = num1 / num2;
             break;
     }
 
-    display.textContent = Math.floor(result * 1000) / 1000;
+    displayContent = Math.floor(result * 1000) / 1000;
 }
