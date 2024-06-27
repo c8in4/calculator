@@ -5,7 +5,9 @@ let result = null;
 
 const display = document.querySelector("#display");
 const clearButton = document.querySelector("#clear");
+clearButton.style.color = "red";
 const equalsButton = document.querySelector("#equals");
+equalsButton.style.background = "green";
 const numButtons = [
     zeroButton = document.querySelector("#zero"),
     oneButton = document.querySelector("#one"),
@@ -18,13 +20,16 @@ const numButtons = [
     eightButton = document.querySelector("#eight"),
     nineButton = document.querySelector("#nine")
 ];
-
 const operatorButtons = [
     plusButton = document.querySelector("#plus"),
     minusButton = document.querySelector("#minus"),
     multiplyButton = document.querySelector("#multiply"),
     divideButton = document.querySelector("#divide")
 ];
+operatorButtons.forEach(button => {
+    button.style.color = "green";
+});
+
 
 equalsButton.addEventListener("click", () => {
     if (num1 && !num2) num2 = getNum();
@@ -36,7 +41,7 @@ equalsButton.addEventListener("click", () => {
 numButtons.forEach(button => {
     button.addEventListener("click", (e) => {
         if (display.textContent == operatorSign
-            || display.textContent == "0")
+            || +display.textContent == "0")
             clearDisplay();
         concatChar(e.target.textContent);
     });
@@ -58,7 +63,7 @@ operatorButtons.forEach(button => {
 });
 
 clearButton.addEventListener("click", () => {
-    clearDisplay();
+display.textContent = "0";
     resetValues();
 });
 
