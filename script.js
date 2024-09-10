@@ -47,6 +47,7 @@ numButtons.forEach(button => {
     });
 });
 
+// TO-FIX: clicking operators button twice assigns operator to num
 operatorButtons.forEach(button => {
     button.addEventListener("click", (e) => {
         if (num1 && !num2) {
