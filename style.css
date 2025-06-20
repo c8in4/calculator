@@ -22,3 +22,50 @@ body {
 main {
     flex: 1;
 }
+
+#calculator {
+    border: 1px solid gray;
+    border-radius: 5px;
+    padding: 5px;
+    background-color: lightgray;
+    width: 200px;
+    box-shadow: 3px 3px 3px lightgray;
+}
+
+#calculatorDisplay {
+    background-color: white;
+    border: 1px solid gray;
+    border-radius: 5px;
+    text-align: right;
+    padding: 5px;
+    margin-bottom: 5px;
+}
+
+#calculatorButtons {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+}
+
+#calculatorButtons>button {
+    width: 25%;
+    border-radius: 5px;
+    background-color: lightgray;
+}
+
+#calculatorButtons>button[data-value='C'],
+#calculatorButtons>button[data-value='0'] {
+    width: 50%;
+}
+
+#calculatorButtons>button[data-value='/'],
+#calculatorButtons>button[data-value='*'],
+#calculatorButtons>button[data-value='-'],
+#calculatorButtons>button[data-value='+'],
+#calculatorButtons>button[data-value='='] {
+    background: orange;
+}
+
+#calculatorButtons>button[data-value]:hover {
+    background-color: gray;
+}
