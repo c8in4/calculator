@@ -65,7 +65,11 @@ calculatorButtons.addEventListener('click', event => {
 })
 
 function equalsInputHandler() {
-    console.log('= clicked')
+    const currentDisplayContent = calculatorDisplay.innerText
+    secondNum = parseFloat(currentDisplayContent)
+    firstNum = operate()
+    if (firstNum) replaceDisplayContent(firstNum)
+    operator = undefined
 }
 
 function decimalPointhandler() {
