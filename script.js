@@ -51,18 +51,59 @@ calculatorButtons.addEventListener('click', event => {
     } else if (buttonPressed == 'AC') {
         resetCalculator()
     } else if (buttonPressed == 'DEL') {
-        removeLastNumber()
+        removeLastChar()
+    } else if (buttonPressed == '.') {
+        decimalPointhandler()
+    }
+    else if (buttonPressed == '=') {
+        equalsInputHandler()
+    } else if (/[\-\+\*\/]/.test(buttonPressed)) {
+        operatorInputHandler(buttonPressed)
     } else {
-
+        console.log('who knows what happened')
     }
 })
 
-function numberInputHandler(number) {
-    concatDisplayContent(number)
+function equalsInputHandler() {
+    console.log('= clicked')
 }
 
-function concatDisplayContent(content) {
+function decimalPointhandler() {
+    if (/[\-\+\*\/]/.test(calculatorDisplay.innerText)) return
+    if (!calculatorDisplay.innerText.includes('.')) {
+        appendDisplayContent('.')
+    }
+}
+
+function operatorInputHandler(operatorPressed) {
+    const currentDisplayContent = calculatorDisplay.innerText
+    if (!currentDisplayContent) return
+    if (!operator) {
+        firstNum = parseFloat(currentDisplayContent)
+        operator = operatorPressed
+    } else if (/[\-\+\*\/]/.test(currentDisplayContent)) {
+        operator = operatorPressed
+    } else {
+        secondNum = parseFloat(currentDisplayContent)
+        firstNum = operate()
+        operator = operatorPressed
+    }
+    replaceDisplayContent(operatorPressed)
+}
+
+function numberInputHandler(number) {
+    if (/^[0\-\+\*\/]{1}$/.test(calculatorDisplay.innerText)) {
+        clearDisplay()
+    }
+    appendDisplayContent(number)
+}
+
+function appendDisplayContent(content) {
     calculatorDisplay.innerText += content
+}
+
+function replaceDisplayContent(content) {
+    calculatorDisplay.innerText = content
 }
 
 function clearDisplay() {
@@ -76,8 +117,9 @@ function resetCalculator() {
     operator = undefined
 }
 
-function removeLastNumber() {
-    const displayContent = calculatorDisplay.innerText
+function removeLastChar() {
+    const currentDisplayContent = calculatorDisplay.innerText
+    if (/[\-\+\*\/]/.test(currentDisplayContent)) return
     clearDisplay()
-    concatDisplayContent(displayContent.split('').slice(0, -1).join(''))
+    appendDisplayContent(currentDisplayContent.split('').slice(0, -1).join(''))
 }
