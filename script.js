@@ -15,15 +15,17 @@ function operate() {
         case '*':
             return multiply(firstNum, secondNum)
         case '/':
+            if (secondNum == 0) {
+                alert('You can not divide by 0.')
+                return
+            }
             return divide(firstNum, secondNum)
     }
 }
 
-const calculatorDisplay = document.querySelector('#calculatorDisplay')
-
 const calculatorButtons = document.querySelector('#calculatorButtons')
 const buttonsArray = [
-    'C', 'DEL', '/',
+    'AC', 'DEL', '/',
     7, 8, 9, '*',
     4, 5, 6, '-',
     1, 2, 3, '+',
@@ -39,3 +41,43 @@ function createButton(text) {
     calculatorButtons.appendChild(button)
 }
 
+const calculatorDisplay = document.querySelector('#calculatorDisplay')
+
+calculatorButtons.addEventListener('click', event => {
+    const buttonPressed = event.target.dataset.value
+
+    if (/\d/.test(buttonPressed)) {
+        numberInputHandler(buttonPressed)
+    } else if (buttonPressed == 'AC') {
+        resetCalculator()
+    } else if (buttonPressed == 'DEL') {
+        removeLastNumber()
+    } else {
+
+    }
+})
+
+function numberInputHandler(number) {
+    concatDisplayContent(number)
+}
+
+function concatDisplayContent(content) {
+    calculatorDisplay.innerText += content
+}
+
+function clearDisplay() {
+    calculatorDisplay.innerText = ''
+}
+
+function resetCalculator() {
+    clearDisplay()
+    firstNum = 0
+    secondNum = undefined
+    operator = undefined
+}
+
+function removeLastNumber() {
+    const displayContent = calculatorDisplay.innerText
+    clearDisplay()
+    concatDisplayContent(displayContent.split('').slice(0, -1).join(''))
+}

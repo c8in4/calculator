@@ -59,7 +59,7 @@ main {
     font-size: large;
 }
 
-#calculatorButtons>button[data-value='C'],
+#calculatorButtons>button[data-value='AC'],
 #calculatorButtons>button[data-value='0'] {
     width: 50%;
 }
