@@ -1,31 +1,21 @@
-let firstNum, secondNum, operator
+let firstNum = 0
+let secondNum, operator
 
-function add(a, b) {
-    return a + b
-}
+function add(a, b) { return a + b }
+function subtract(a, b) { return a - b }
+function multiply(a, b) { return a * b }
+function divide(a, b) { return a / b }
 
-function subtract(a, b) {
-    return a - b
-}
-
-function multiply(a, b) {
-    return a * b
-}
-
-function divide(a, b) {
-    return a / b
-}
-
-function operate(num1, num2, op) {
-    switch (op) {
+function operate() {
+    switch (operator) {
         case '+':
-            return add(num1, num2)
+            return add(firstNum, secondNum)
         case '-':
-            return subtract(num1, num2)
+            return subtract(firstNum, secondNum)
         case '*':
-            return multiply(num1, num2)
+            return multiply(firstNum, secondNum)
         case '/':
-            return divide(num1, num2)
+            return divide(firstNum, secondNum)
     }
 }
 
@@ -33,7 +23,7 @@ const calculatorDisplay = document.querySelector('#calculatorDisplay')
 
 const calculatorButtons = document.querySelector('#calculatorButtons')
 const buttonsArray = [
-    'C', '%', '/',
+    'C', 'DEL', '/',
     7, 8, 9, '*',
     4, 5, 6, '-',
     1, 2, 3, '+',
