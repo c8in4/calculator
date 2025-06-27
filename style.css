@@ -1,3 +1,13 @@
+:root {
+    --bg-dark: oklch(0.9 0 0);
+    --bg: oklch(0.95 0 0);
+    --bg-light: oklch(1 0 0);
+    --txt: oklch(0.05 0 0);
+    --txt-muted: oklch(0.3 0 0);
+    --accent: oklch(0.75 0.15 60);
+    --accent-muted: oklch(0.9 0.15 60);
+}
+
 html {
     box-sizing: border-box;
     font-size: 62.5%;
@@ -10,6 +20,7 @@ html {
 }
 
 body {
+    font-family: sans-serif;
     font-size: 1.6rem;
     margin: 0;
     display: flex;
@@ -24,28 +35,30 @@ main {
 }
 
 #calculator {
+    background-color: var(--bg);
+    color: var(--txt);
     width: 30rem;
-    aspect-ratio: 1;
-    border: 1px solid gray;
-    border-radius: 5px;
-    padding: 5px;
-    background-color: lightgray;
-    box-shadow: 3px 3px 3px lightgray;
+    border: 0.1rem solid gray;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    box-shadow: 0.3rem 0.3rem 0.3rem lightgray;
 }
 
 #calculatorDisplay {
-    background-color: white;
-    height: 53.5px;
-    border: 1px solid gray;
-    border-radius: 5px;
+    background-color: var(--bg-light);
+    color: var(--txt);
+    height: 6rem;
+    border: 0.1rem solid gray;
+    border-radius: 0.5rem;
     text-align: right;
-    padding: 5px 8px;
-    margin-bottom: 5px;
+    padding: 0.5rem 0.8rem;
+    margin-bottom: 0.5rem;
     font-size: xx-large;
     overflow-y: scroll;
 }
 
 #calculatorButtons {
+    aspect-ratio: 1;
     height: 100%;
     display: flex;
     flex-wrap: wrap;
@@ -53,10 +66,10 @@ main {
 }
 
 #calculatorButtons>button {
+    background-color: var(--bg-dark);
     width: 25%;
-    border-radius: 5px;
-    background-color: lightgray;
-    font-size: large;
+    border-radius: 0.5rem;
+    font-size: 2.4rem;
 }
 
 #calculatorButtons>button[data-value='AC'],
@@ -69,9 +82,17 @@ main {
 #calculatorButtons>button[data-value='-'],
 #calculatorButtons>button[data-value='+'],
 #calculatorButtons>button[data-value='='] {
-    background: orange;
+    background-color: var(--accent);
 }
 
 #calculatorButtons>button[data-value]:hover {
-    background-color: gray;
+    background-color: var(--bg-light);
+}
+
+#calculatorButtons>button[data-value='/']:hover,
+#calculatorButtons>button[data-value='*']:hover,
+#calculatorButtons>button[data-value='-']:hover,
+#calculatorButtons>button[data-value='+']:hover,
+#calculatorButtons>button[data-value='=']:hover {
+    background-color: var(--accent-muted);
 }
