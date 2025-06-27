@@ -1,5 +1,4 @@
-let firstNum = 0
-let secondNum, operator
+let firstNum, secondNum, operator
 
 function add(a, b) { return a + b }
 function subtract(a, b) { return a - b }
@@ -68,7 +67,7 @@ function equalsInputHandler() {
     const currentDisplayContent = calculatorDisplay.innerText
     secondNum = parseFloat(currentDisplayContent)
     firstNum = operate()
-    if (firstNum) replaceDisplayContent(firstNum)
+    if (firstNum || firstNum == '0') replaceDisplayContent(firstNum)
     operator = undefined
 }
 
@@ -116,9 +115,7 @@ function clearDisplay() {
 
 function resetCalculator() {
     clearDisplay()
-    firstNum = 0
-    secondNum = undefined
-    operator = undefined
+    firstNum = secondNum = operator = undefined
 }
 
 function removeLastChar() {
